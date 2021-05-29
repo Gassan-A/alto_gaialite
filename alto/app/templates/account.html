@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="text-box">
+        {% if current_user.user_type == 'corp' %}
+            <div class="account-border" style="color: #E69597;">
+                Company Account
+            </div>
+        {% elif current_user.user_type == 'char' %}
+            <div class="account-border" style="color: #E1BC29">
+                Charity Account
+            </div>
+        {% endif %}
+        <h1>
+            Hi {{ current_user.username }}
+        </h1>
+    </div>
+{% endblock content %}

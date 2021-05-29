@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+        <title>Alto Gailaite - {{ title }}</title>
+    {% else %}
+        <title>Alto Gaialite</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="/"><img src="{{ url_for('static', filename='logo.png') }}">
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" onclick="return hideMenu()" id="fas"></i>
+                <ul>
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/search">SEARCH</a></li>
+                    <li><a href="/posts">POSTS</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="/logout">LOGOUT</a></li>
+                        <li><a href="/account"><i class="far fa-user"></i></a></li>
+                    {% else %}
+                        <li><a href="/register">REGISTER</a></li>
+                        <li><a href="/login"><i class="far fa-user"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <i class="fas fa-bars" onclick="return showMenu()"></i>
+        </nav>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+        <div style="height:30px; width:100%;"></div>
+    </section>
+<script>
+    var navLinks = document.getElementById("navLinks");
+    var fas = document.getElementById("fas");
+
+    function showMenu(){
+        navLinks.style.right = "0";
+        fas.style.color = "#93F9B9";
+        return false;
+    }
+
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+        fas.style.color = "#fff";
+        return false;
+    }
+</script>
+
+</body>
+</html>

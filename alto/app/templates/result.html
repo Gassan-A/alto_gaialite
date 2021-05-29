@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="text-box", style="margin: 0 auto; width: 50%; text-align: center; top: 0; left: 0;">
+        <h1 style="font-size: 40px; animation: fadein 2.5s;">Results</h1>
+    </div>
+    <div class="cards" style="margin: 0 auto; width: 50%; text-align: center; top: 0; left: 0;">
+        {% if result %}
+        {% for x in result %}
+        <div class="card" style="min-height: 30rem;display: flex; flex-direction: column; margin: 20px; background-color: #fff; border-radius: 16px; padding: 20px;">
+          <div class="card-body" style="height: 100%; font: PT Sans; position: relative; display: flex; flex-direction: column;">
+            <h5 class="card-title" style="font-weight: bold;">{{ x[14] }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold;">{{ x[17] }}</h6>
+            <p style="color: #1D976C !important;">{{ x[13] }}</p>
+            <p class="card-text" style="color: #1D976C !important;">Similarity Score: {{ sim_scores[loop.index - 1] }}</p>
+            <div style="margin-top: auto;"><a href="#" class="hero-btn-inverse" style=" margin-top: auto; bottom: 0; left: 0; right: 0;">Visit Website</a></div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+{% endblock content %}

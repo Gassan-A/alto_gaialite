@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="text-box">
+        <h1>Search</h1>
+        <p>enter a discription of the cause you want to support</p>
+    </div>
+    <div class="text-box" style="width: 50%">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ form.search.label(class="form-control-label") }}
+                        {% if form.search.errors %}
+                            {{ form.search(class="form-control form-control-lg is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for error in form.search.errors %}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.search(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="hero-btn")}}
+                </div>
+            </form>
+        </div>
+{% endblock content %}
